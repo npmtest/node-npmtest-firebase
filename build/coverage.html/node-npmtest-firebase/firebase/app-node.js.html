@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-firebase/firebase/app-node.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-firebase">npmtest-firebase (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-firebase/firebase/app-node.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">21.05% <small>(100 / 475)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">13.02% <small>(41 / 315)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">8.27% <small>(11 / 133)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">85.71% <small>(24 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-firebase/firebase/</a> &#187; app-node.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">59</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*! @license Firebase v3.7.5
+    Build: 3.7.5-rc.1
+    Terms: https://firebase.google.com/terms/ */
+var firebase = (function() { var l="function"==typeof Object.defineProperties?Object.defineProperty:<span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function(a,b,c){<span class="cstat-no" title="statement not covered" ></span>if(c.get||c.set)<span class="cstat-no" title="statement not covered" >throw new TypeError("ES3 does not support getters and setters.");<span class="cstat-no" title="statement not covered" >a</span></span>!=Array.prototype&amp;&amp;a!=Object.prototype&amp;&amp;(a[b]=c.value)}</span>,</span>m="undefined"!=typeof window&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >window===this?<span class="branch-0 cbranch-no" title="branch not covered" ></span>this:</span>"undefined"!=typeof global&amp;&amp;null!=global?global:<span class="branch-1 cbranch-no" title="branch not covered" >this,</span>p=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>p=<span class="fstat-no" title="function not covered" >function(){</span>};<span class="cstat-no" title="statement not covered" >m</span>.Symbol||(m.Symbol=q)}</span>,r=0,q=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return"jscomp_symbol_"+(a||"")+r++}</span>,u=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>p();<span class="cstat-no" title="statement not covered" >v</span>ar a=m.Symbol.iterator;<span class="cstat-no" title="statement not covered" >a</span>||(a=m.Symbol.iterator=m.Symbol("iterator"));</span>
+<span class="cstat-no" title="statement not covered" >"function"!=typeof Array.prototype[a]&amp;&amp;l(Array.prototype,a,{configurable:!0,writable:!0,value:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return t(this)}</span>});<span class="cstat-no" title="statement not covered" >u</span>=<span class="fstat-no" title="function not covered" >function(){</span>}}</span>,t=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=0;<span class="cstat-no" title="statement not covered" >r</span>eturn v(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return b&lt;a.length?{done:!1,value:a[b++]}:{done:!0}}</span>)}</span>,v=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>u();<span class="cstat-no" title="statement not covered" >a</span>={next:a};<span class="cstat-no" title="statement not covered" >a</span>[m.Symbol.iterator]=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return this}</span>;<span class="cstat-no" title="statement not covered" >r</span>eturn a}</span>,w=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>u();<span class="cstat-no" title="statement not covered" >v</span>ar b=a[Symbol.iterator];<span class="cstat-no" title="statement not covered" >r</span>eturn b?b.call(a):t(a)}</span>,x=function(a,b){<span class="missing-if-branch" title="else path not taken" >E</span>if(b){var c=m;a=a.split(".");for(var d=0;d&lt;a.length-1;d++){var e=a[d];e in c||(<span class="branch-1 cbranch-no" title="branch not covered" >c[e]={})</span>;c=c[e]}a=a[a.length-
+1];d=c[a];b=b(d);b!=d&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >null!=b&amp;</span>&amp;<span class="branch-2 cbranch-no" title="branch not covered" >l(c,a,{configurable:!0,writable:!0,value:b})}</span>};x("Object.assign",function(a){return a?a:<span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function(a,c){<span class="cstat-no" title="statement not covered" ></span>for(var b=1;b&lt;arguments.length;b++){<span class="cstat-no" title="statement not covered" >var e=arguments[b];<span class="cstat-no" title="statement not covered" >i</span>f(e)<span class="cstat-no" title="statement not covered" >for(var g in e)<span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(e,g)&amp;&amp;(a[g]=e[g])}<span class="cstat-no" title="statement not covered" ></span></span></span>r</span>eturn a}</span>}</span>);
+x("Promise",function(a){<span class="fstat-no" title="function not covered" >function b(){<span class="cstat-no" title="statement not covered" ></span>this.c=null}<span class="missing-if-branch" title="else path not taken" >E</span></span>if(a)return a;<span class="cstat-no" title="statement not covered" >b.prototype.A=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>null==this.c&amp;&amp;(this.c=[],this.M());<span class="cstat-no" title="statement not covered" >t</span>his.c.push(a)}</span>;<span class="cstat-no" title="statement not covered" >b</span>.prototype.M=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var a=this;<span class="cstat-no" title="statement not covered" >t</span>his.B(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>a.R()}</span>)}</span>;<span class="cstat-no" title="statement not covered" >v</span>ar c=m.setTimeout;<span class="cstat-no" title="statement not covered" >b</span>.prototype.B=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>c(a,0)}</span>;<span class="cstat-no" title="statement not covered" >b</span>.prototype.R=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>for(;this.c&amp;&amp;this.c.length;){<span class="cstat-no" title="statement not covered" >var a=this.c;<span class="cstat-no" title="statement not covered" >t</span>his.c=[];<span class="cstat-no" title="statement not covered" >f</span>or(var b=0;b&lt;a.length;++b){<span class="cstat-no" title="statement not covered" >var c=a[b];<span class="cstat-no" title="statement not covered" >d</span>elete a[b];<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >c()}</span>catch(k){<span class="cstat-no" title="statement not covered" >this.N(k)}</span>}</span>}<span class="cstat-no" title="statement not covered" ></span>t</span>his.c=null}</span>;<span class="cstat-no" title="statement not covered" >b</span>.prototype.N=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.B(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>throw a;}</span>)}</span>;<span class="cstat-no" title="statement not covered" >v</span>ar d=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.g=</span></span>
+0;<span class="cstat-no" title="statement not covered" >this.v=void 0;<span class="cstat-no" title="statement not covered" >t</span>his.f=[];<span class="cstat-no" title="statement not covered" >v</span>ar b=this.j();<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >a(b.resolve,b.reject)}</span>catch(f){<span class="cstat-no" title="statement not covered" >b.reject(f)}</span>}</span>;<span class="cstat-no" title="statement not covered" >d.prototype.j=<span class="fstat-no" title="function not covered" >function(){<span class="fstat-no" title="function not covered" ></span>function a(a){<span class="cstat-no" title="statement not covered" ></span>return <span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>c||(c=!0,a.call(b,d))}</span>}<span class="cstat-no" title="statement not covered" ></span>var b=this,c=!1;<span class="cstat-no" title="statement not covered" >r</span>eturn{resolve:a(this.W),reject:a(this.u)}}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.W=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>if(a===this)<span class="cstat-no" title="statement not covered" >this.u(new TypeError("A Promise cannot resolve to itself"));e</span>lse <span class="cstat-no" title="statement not covered" >if(a instanceof d)<span class="cstat-no" title="statement not covered" >this.Z(a);e</span>lse{<span class="cstat-no" title="statement not covered" >var b;<span class="cstat-no" title="statement not covered" >a</span>:<span class="cstat-no" title="statement not covered" >switch(typeof a){case "object":<span class="cstat-no" title="statement not covered" >b=null!=a;<span class="cstat-no" title="statement not covered" >b</span>reak a;c</span>ase "function":<span class="cstat-no" title="statement not covered" >b=!0;<span class="cstat-no" title="statement not covered" >b</span>reak a;d</span>efault:<span class="cstat-no" title="statement not covered" >b=!1}<span class="cstat-no" title="statement not covered" ></span>b</span></span>?this.V(a):this.G(a)}</span>}</span></span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.V=</span>
+<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=void 0;<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >b=a.then}</span>catch(f){<span class="cstat-no" title="statement not covered" >this.u(f);<span class="cstat-no" title="statement not covered" >r</span>eturn}<span class="cstat-no" title="statement not covered" ></span>"</span>function"==typeof b?this.$(b,a):this.G(a)}</span>;<span class="cstat-no" title="statement not covered" >d.prototype.u=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.J(2,a)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.G=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.J(1,a)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.J=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>if(0!=this.g)<span class="cstat-no" title="statement not covered" >throw Error("Cannot settle("+a+", "+b|"): Promise already settled in state"+this.g);<span class="cstat-no" title="statement not covered" >t</span></span>his.g=a;<span class="cstat-no" title="statement not covered" >t</span>his.v=b;<span class="cstat-no" title="statement not covered" >t</span>his.S()}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.S=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>if(null!=this.f){<span class="cstat-no" title="statement not covered" >for(var a=this.f,b=0;b&lt;a.length;++b)<span class="cstat-no" title="statement not covered" >a[b].call(),a[b]=null;<span class="cstat-no" title="statement not covered" >t</span></span>his.f=null}</span>}</span>;<span class="cstat-no" title="statement not covered" >v</span>ar e=new b;<span class="cstat-no" title="statement not covered" >d</span>.prototype.Z=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=this.j();</span></span>
+<span class="cstat-no" title="statement not covered" >a.h(b.resolve,b.reject)}</span>;<span class="cstat-no" title="statement not covered" >d.prototype.$=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c=this.j();<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >a.call(b,c.resolve,c.reject)}</span>catch(k){<span class="cstat-no" title="statement not covered" >c.reject(k)}</span>}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.then=<span class="fstat-no" title="function not covered" >function(a,b){<span class="fstat-no" title="function not covered" ></span>function c(a,b){<span class="cstat-no" title="statement not covered" ></span>return"function"==typeof a?<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>try{<span class="cstat-no" title="statement not covered" >k(a(b))}</span>catch(R){<span class="cstat-no" title="statement not covered" >e(R)}</span>}</span>:b}<span class="cstat-no" title="statement not covered" ></span>var k,e,g=new d(<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>k=a;<span class="cstat-no" title="statement not covered" >e</span>=b}</span>);<span class="cstat-no" title="statement not covered" >t</span>his.h(c(a,k),c(b,e));<span class="cstat-no" title="statement not covered" >r</span>eturn g}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.catch=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return this.then(void 0,a)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.prototype.h=<span class="fstat-no" title="function not covered" >function(a,b){<span class="fstat-no" title="function not covered" ></span>function c(){<span class="cstat-no" title="statement not covered" ></span>switch(d.g){case 1:<span class="cstat-no" title="statement not covered" >a(d.v);<span class="cstat-no" title="statement not covered" >b</span>reak;c</span>ase 2:<span class="cstat-no" title="statement not covered" >b(d.v);<span class="cstat-no" title="statement not covered" >b</span>reak;d</span>efault:<span class="cstat-no" title="statement not covered" >throw Error("Unexpected state: "+</span></span></span>
+d.g);}}<span class="cstat-no" title="statement not covered" >var d=this;<span class="cstat-no" title="statement not covered" >n</span>ull==this.f?e.A(c):this.f.push(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>e.A(c)}</span>)}</span>;<span class="cstat-no" title="statement not covered" >d.resolve=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return a instanceof d?a:new d(<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b(a)}</span>)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.reject=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return new d(<span class="fstat-no" title="function not covered" >function(b,c){<span class="cstat-no" title="statement not covered" ></span>c(a)}</span>)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.race=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return new d(<span class="fstat-no" title="function not covered" >function(b,c){<span class="cstat-no" title="statement not covered" ></span>for(var f=w(a),e=f.next();!e.done;e=f.next())<span class="cstat-no" title="statement not covered" >d.resolve(e.value).h(b,c)}</span></span>)}</span>;<span class="cstat-no" title="statement not covered" >d</span>.all=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=w(a),c=b.next();<span class="cstat-no" title="statement not covered" >r</span>eturn c.done?d.resolve([]):new d(<span class="fstat-no" title="function not covered" >function(a,e){<span class="fstat-no" title="function not covered" ></span>function f(b){<span class="cstat-no" title="statement not covered" ></span>return <span class="fstat-no" title="function not covered" >function(c){<span class="cstat-no" title="statement not covered" ></span>k[b]=c;<span class="cstat-no" title="statement not covered" >g</span>--;<span class="cstat-no" title="statement not covered" >0</span>==g&amp;&amp;a(k)}</span>}<span class="cstat-no" title="statement not covered" ></span>var k=[],g=0;<span class="cstat-no" title="statement not covered" >d</span>o <span class="cstat-no" title="statement not covered" >k.push(void 0),g++,d.resolve(c.value).h(f(k.length-</span></span></span></span>
+1),e),c=b.next();while(!c.done)})};<span class="cstat-no" title="statement not covered" >d.$jscomp$new$AsyncExecutor=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return new b}</span>;<span class="cstat-no" title="statement not covered" >r</span>eturn d}</span>);var y;y="undefined"!==typeof window?<span class="branch-0 cbranch-no" title="branch not covered" >window:</span>"undefined"!==typeof self?<span class="branch-0 cbranch-no" title="branch not covered" >self:</span>global;
+var __extends=<span class="fstat-no" title="function not covered" >function(a,b){<span class="fstat-no" title="function not covered" ></span>function c(){<span class="cstat-no" title="statement not covered" ></span>this.constructor=a}<span class="cstat-no" title="statement not covered" ></span>for(var d in b)<span class="cstat-no" title="statement not covered" >b.hasOwnProperty(d)&amp;&amp;(a[d]=b[d]);<span class="cstat-no" title="statement not covered" >a</span></span>.prototype=null===b?Object.create(b):(c.prototype=b.prototype,new c)}</span>,__assign=Object.assign||<span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>for(var b,c=1,d=arguments.length;c&lt;d;c++){<span class="cstat-no" title="statement not covered" >b=arguments[c];<span class="cstat-no" title="statement not covered" >f</span>or(var e in b)<span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(b,e)&amp;&amp;(a[e]=b[e])}<span class="cstat-no" title="statement not covered" ></span></span>r</span>eturn a}</span>,</span>__rest=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c={},d;<span class="cstat-no" title="statement not covered" >f</span>or(d in a)<span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(a,d)&amp;&amp;0&gt;b.indexOf(d)&amp;&amp;(c[d]=a[d]);<span class="cstat-no" title="statement not covered" >i</span></span>f(null!=a&amp;&amp;"function"===typeof Object.getOwnPropertySymbols){<span class="cstat-no" title="statement not covered" >var e=</span></span>
+0;<span class="cstat-no" title="statement not covered" >for(d=Object.getOwnPropertySymbols(a);e&lt;d.length;e++)<span class="cstat-no" title="statement not covered" >0&gt;b.indexOf(d[e])&amp;&amp;(c[d[e]]=a[d[e]])}<span class="cstat-no" title="statement not covered" ></span></span>return c}</span>,__decorate=<span class="fstat-no" title="function not covered" >function(a,b,c,d){<span class="cstat-no" title="statement not covered" ></span>var e=arguments.length,g=3&gt;e?b:null===d?d=Object.getOwnPropertyDescriptor(b,c):d,h;<span class="cstat-no" title="statement not covered" >h</span>=y.Reflect;<span class="cstat-no" title="statement not covered" >i</span>f("object"===typeof h&amp;&amp;"function"===typeof h.decorate)<span class="cstat-no" title="statement not covered" >g=h.decorate(a,b,c,d);e</span>lse <span class="cstat-no" title="statement not covered" >for(var f=a.length-1;0&lt;=f;f--)<span class="cstat-no" title="statement not covered" >if(h=a[f])<span class="cstat-no" title="statement not covered" >g=(3&gt;e?h(g):3&lt;e?h(b,c,g):h(b,c))||g;<span class="cstat-no" title="statement not covered" >r</span></span></span></span>eturn 3&lt;e&amp;&amp;g&amp;&amp;Object.defineProperty(b,c,g),g}</span>,__metadata=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c=y.Reflect;<span class="cstat-no" title="statement not covered" >i</span>f("object"===typeof c&amp;&amp;"function"===</span>
+typeof c.metadata)<span class="cstat-no" title="statement not covered" >return c.metadata(a,b)}</span>,__param=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>return <span class="fstat-no" title="function not covered" >function(c,d){<span class="cstat-no" title="statement not covered" ></span>b(c,d,a)}</span>}</span>,__awaiter=<span class="fstat-no" title="function not covered" >function(a,b,c,d){<span class="cstat-no" title="statement not covered" ></span>return new (c||(c=Promise))(<span class="fstat-no" title="function not covered" >function(e,g){<span class="fstat-no" title="function not covered" ></span>function h(a){<span class="cstat-no" title="statement not covered" ></span>try{<span class="cstat-no" title="statement not covered" >k(d.next(a))}</span>catch(n){<span class="cstat-no" title="statement not covered" >g(n)}</span>}<span class="fstat-no" title="function not covered" ></span>function f(a){<span class="cstat-no" title="statement not covered" ></span>try{<span class="cstat-no" title="statement not covered" >k(d["throw"](a))}</span>catch(n){<span class="cstat-no" title="statement not covered" >g(n)}</span>}<span class="fstat-no" title="function not covered" ></span>function k(a){<span class="cstat-no" title="statement not covered" ></span>a.done?e(a.value):(new c(<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b(a.value)}</span>)).then(h,f)}<span class="cstat-no" title="statement not covered" ></span>k((d=d.apply(a,b)).next())}</span>)}</span>,__generator=<span class="fstat-no" title="function not covered" >function(a,b){<span class="fstat-no" title="function not covered" ></span>function c(a){<span class="cstat-no" title="statement not covered" ></span>return <span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>return d([a,b])}</span>}<span class="fstat-no" title="function not covered" ></span>function d(c){<span class="cstat-no" title="statement not covered" ></span>if(g)<span class="cstat-no" title="statement not covered" >throw new TypeError("Generator is already executing.");</span></span>
+<span class="cstat-no" title="statement not covered" >for(;e;)<span class="cstat-no" title="statement not covered" >try{<span class="cstat-no" title="statement not covered" >if(g=1,h&amp;&amp;(f=h[c[0]&amp;2?"return":c[0]?"throw":"next"])&amp;&amp;!(f=f.call(h,c[1])).done)<span class="cstat-no" title="statement not covered" >return f;<span class="cstat-no" title="statement not covered" >i</span></span>f(h=0,f)<span class="cstat-no" title="statement not covered" >c=[0,f.value];<span class="cstat-no" title="statement not covered" >s</span></span>witch(c[0]){case 0:case 1:<span class="cstat-no" title="statement not covered" >f=c;<span class="cstat-no" title="statement not covered" >b</span>reak;c</span>ase 4:<span class="cstat-no" title="statement not covered" >return e.label++,{value:c[1],done:!1};c</span>ase 5:<span class="cstat-no" title="statement not covered" >e.label++;<span class="cstat-no" title="statement not covered" >h</span>=c[1];<span class="cstat-no" title="statement not covered" >c</span>=[0];<span class="cstat-no" title="statement not covered" >c</span>ontinue;c</span>ase 7:<span class="cstat-no" title="statement not covered" >c=e.o.pop();<span class="cstat-no" title="statement not covered" >e</span>.w.pop();<span class="cstat-no" title="statement not covered" >c</span>ontinue;d</span>efault:<span class="cstat-no" title="statement not covered" >if(!(f=e.w,f=0&lt;f.length&amp;&amp;f[f.length-1])&amp;&amp;(6===c[0]||2===c[0])){<span class="cstat-no" title="statement not covered" >e=0;<span class="cstat-no" title="statement not covered" >c</span>ontinue}<span class="cstat-no" title="statement not covered" ></span>i</span>f(3===c[0]&amp;&amp;(!f||c[1]&gt;f[0]&amp;&amp;c[1]&lt;f[3]))<span class="cstat-no" title="statement not covered" >e.label=c[1];e</span>lse <span class="cstat-no" title="statement not covered" >if(6===c[0]&amp;&amp;e.label&lt;f[1])<span class="cstat-no" title="statement not covered" >e.label=f[1],f=c;e</span>lse <span class="cstat-no" title="statement not covered" >if(f&amp;&amp;e.label&lt;f[2])<span class="cstat-no" title="statement not covered" >e.label=f[2],</span></span></span></span></span></span></span>
+e.o.push(c);else{<span class="cstat-no" title="statement not covered" >f[2]&amp;&amp;e.o.pop();<span class="cstat-no" title="statement not covered" >e</span>.w.pop();<span class="cstat-no" title="statement not covered" >c</span>ontinue}</span>}<span class="cstat-no" title="statement not covered" >c=b.call(a,e)}</span>catch(P){<span class="cstat-no" title="statement not covered" >c=[6,P],h=0}</span>finally{<span class="cstat-no" title="statement not covered" >g=f=0}<span class="cstat-no" title="statement not covered" ></span>if(c[0]&amp;5)<span class="cstat-no" title="statement not covered" >throw c[1];<span class="cstat-no" title="statement not covered" >r</span></span>eturn{value:c[0]?c[1]:void 0,done:!0}}<span class="cstat-no" title="statement not covered" ></span>var e={label:0,ba:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>if(f[0]&amp;1)<span class="cstat-no" title="statement not covered" >throw f[1];<span class="cstat-no" title="statement not covered" >r</span></span>eturn f[1]}</span>,w:[],o:[]},g,h,f;<span class="cstat-no" title="statement not covered" >r</span>eturn{next:c(0),"throw":c(1),"return":c(2)}}</span>;
+"undefined"!==typeof y.K&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >y.K|</span>|(y.__extends=__extends,y.__assign=__assign,y.__rest=__rest,y.__extends=__extends,y.__decorate=__decorate,y.__metadata=__metadata,y.__param=__param,y.__awaiter=__awaiter,y.__generator=__generator);function z(a,b){if(!(b instanceof Object))return b;switch(b.constructor){<span class="branch-0 cbranch-no" title="branch not covered" >case Date:<span class="cstat-no" title="statement not covered" >return new Date(b.getTime());c</span></span>ase Object:void 0===a&amp;&amp;(a={});break;<span class="branch-2 cbranch-no" title="branch not covered" >case Array:<span class="cstat-no" title="statement not covered" >a=[];<span class="cstat-no" title="statement not covered" >b</span>reak;d</span></span>efault:return b}for(var c in b)b.hasOwnProperty(c)&amp;&amp;(a[c]=z(a[c],b[c]));return a};var A="undefined"!==typeof Promise?Promise:<span class="branch-1 cbranch-no" title="branch not covered" >require("rsvp").Promise;<span class="fstat-no" title="function not covered" ></span>function B(a,b){<span class="cstat-no" title="statement not covered" ></span>a=new C(a,b);<span class="cstat-no" title="statement not covered" >r</span>eturn a.subscribe.bind(a)}</span>var C=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c=this;<span class="cstat-no" title="statement not covered" >t</span>his.a=[];<span class="cstat-no" title="statement not covered" >t</span>his.I=0;<span class="cstat-no" title="statement not covered" >t</span>his.task=A.resolve();<span class="cstat-no" title="statement not covered" >t</span>his.i=!1;<span class="cstat-no" title="statement not covered" >t</span>his.m=b;<span class="cstat-no" title="statement not covered" >t</span>his.task.then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>a(c)}</span>).catch(<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>c.error(a)}</span>)}</span>;C.prototype.next=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>D(this,<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b.next(a)}</span>)}</span>;C.prototype.error=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>D(this,<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b.error(a)}</span>);<span class="cstat-no" title="statement not covered" >t</span>his.close(a)}</span>;C.prototype.complete=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>D(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>a.complete()}</span>);<span class="cstat-no" title="statement not covered" >t</span>his.close()}</span>;
+C.prototype.subscribe=<span class="fstat-no" title="function not covered" >function(a,b,c){<span class="cstat-no" title="statement not covered" ></span>var d=this,e;<span class="cstat-no" title="statement not covered" >i</span>f(void 0===a&amp;&amp;void 0===b&amp;&amp;void 0===c)<span class="cstat-no" title="statement not covered" >throw Error("Missing Observer.");<span class="cstat-no" title="statement not covered" >e</span></span>=E(a)?a:{next:a,error:b,complete:c};<span class="cstat-no" title="statement not covered" >v</span>oid 0===e.next&amp;&amp;(e.next=F);<span class="cstat-no" title="statement not covered" >v</span>oid 0===e.error&amp;&amp;(e.error=F);<span class="cstat-no" title="statement not covered" >v</span>oid 0===e.complete&amp;&amp;(e.complete=F);<span class="cstat-no" title="statement not covered" >a</span>=this.aa.bind(this,this.a.length);<span class="cstat-no" title="statement not covered" >t</span>his.i&amp;&amp;this.task.then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>try{<span class="cstat-no" title="statement not covered" >d.D?e.error(d.D):e.complete()}</span>catch(g){}}</span>);<span class="cstat-no" title="statement not covered" >t</span>his.a.push(e);<span class="cstat-no" title="statement not covered" >r</span>eturn a}</span>;
+C.prototype.aa=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>void 0!==this.a&amp;&amp;void 0!==this.a[a]&amp;&amp;(delete this.a[a],--this.I,0===this.I&amp;&amp;void 0!==this.m&amp;&amp;this.m(this))}</span>;var D=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>if(!a.i)<span class="cstat-no" title="statement not covered" >for(var c=0;c&lt;a.a.length;c++)<span class="cstat-no" title="statement not covered" >G(a,c,b)}</span></span></span>,G=<span class="fstat-no" title="function not covered" >function(a,b,c){<span class="cstat-no" title="statement not covered" ></span>a.task.then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>if(void 0!==a.a&amp;&amp;void 0!==a.a[b])<span class="cstat-no" title="statement not covered" >try{<span class="cstat-no" title="statement not covered" >c(a.a[b])}</span>catch(d){<span class="cstat-no" title="statement not covered" >"undefined"!==typeof console&amp;&amp;console.error&amp;&amp;console.error(d)}</span>}</span></span>)}</span>;C.prototype.close=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=this;<span class="cstat-no" title="statement not covered" >t</span>his.i||(this.i=!0,void 0!==a&amp;&amp;(this.D=a),this.task.then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>b.a=void 0;<span class="cstat-no" title="statement not covered" >b</span>.m=void 0}</span>))}</span>;
+<span class="fstat-no" title="function not covered" >function E(a){<span class="cstat-no" title="statement not covered" ></span>if("object"!==typeof a||null===a)<span class="cstat-no" title="statement not covered" >return!1;<span class="cstat-no" title="statement not covered" >f</span></span>or(var b=w(["next","error","complete"]),c=b.next();!c.done;c=b.next())<span class="cstat-no" title="statement not covered" >if(c=c.value,c in a&amp;&amp;"function"===typeof a[c])<span class="cstat-no" title="statement not covered" >return!0;<span class="cstat-no" title="statement not covered" >r</span></span></span>eturn!1}<span class="fstat-no" title="function not covered" ></span>function F(){</span>};var H=Error.captureStackTrace,J=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>this.code=a;<span class="cstat-no" title="statement not covered" >t</span>his.message=b;<span class="cstat-no" title="statement not covered" >i</span>f(H)<span class="cstat-no" title="statement not covered" >H(this,I.prototype.create);e</span>lse{<span class="cstat-no" title="statement not covered" >var c=Error.apply(this,arguments);<span class="cstat-no" title="statement not covered" >t</span>his.name="FirebaseError";<span class="cstat-no" title="statement not covered" >O</span>bject.defineProperty(this,"stack",{get:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return c.stack}</span>})}</span>}</span>;J.prototype=Object.create(Error.prototype);J.prototype.constructor=J;J.prototype.name="FirebaseError";var I=function(a,b,c){this.X=a;this.Y=b;this.P=c;this.pattern=/\{\$([^}]+)}/g};
+I.prototype.create=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>void 0===b&amp;&amp;(b={});<span class="cstat-no" title="statement not covered" >v</span>ar c=this.P[a];<span class="cstat-no" title="statement not covered" >a</span>=this.X+"/"+a;<span class="cstat-no" title="statement not covered" >v</span>ar c=void 0===c?"Error":c.replace(this.pattern,<span class="fstat-no" title="function not covered" >function(a,c){<span class="cstat-no" title="statement not covered" ></span>a=b[c];<span class="cstat-no" title="statement not covered" >r</span>eturn void 0!==a?a.toString():"&lt;"+c+"?&gt;"}</span>),c=this.Y+": "+c+" ("+a+").",c=new J(a,c),d;<span class="cstat-no" title="statement not covered" >f</span>or(d in b)<span class="cstat-no" title="statement not covered" >b.hasOwnProperty(d)&amp;&amp;"_"!==d.slice(-1)&amp;&amp;(c[d]=b[d]);<span class="cstat-no" title="statement not covered" >r</span></span>eturn c}</span>;var K=<span class="fstat-no" title="function not covered" >function(a,b,c){<span class="cstat-no" title="statement not covered" ></span>var d=this;<span class="cstat-no" title="statement not covered" >t</span>his.F=c;<span class="cstat-no" title="statement not covered" >t</span>his.H=!1;<span class="cstat-no" title="statement not covered" >t</span>his.b={};<span class="cstat-no" title="statement not covered" >t</span>his.l=b;<span class="cstat-no" title="statement not covered" >t</span>his.s=z(void 0,a);<span class="cstat-no" title="statement not covered" >a</span>="serviceAccount"in this.s;<span class="cstat-no" title="statement not covered" >(</span>"credential"in this.s||a)&amp;&amp;"undefined"!==typeof console&amp;&amp;console.log("The '"+(a?"serviceAccount":"credential")+"' property specified in the first argument to initializeApp() is deprecated and will be removed in the next major version. You should instead use the 'firebase-admin' package. See https://firebase.google.com/docs/admin/setup for details on how to get started.");<span class="cstat-no" title="statement not covered" >O</span>bject.keys(c.INTERNAL.factories).forEach(<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=</span></span>
+c.INTERNAL.useAsService(d,a);<span class="cstat-no" title="statement not covered" >null!==b&amp;&amp;(b=d.U.bind(d,b),d[a]=b)}</span>)};K.prototype.delete=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var a=this;<span class="cstat-no" title="statement not covered" >r</span>eturn(new A(<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>L(a);<span class="cstat-no" title="statement not covered" >b</span>()}</span>)).then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>a.F.INTERNAL.removeApp(a.l);<span class="cstat-no" title="statement not covered" >v</span>ar b=[];<span class="cstat-no" title="statement not covered" >O</span>bject.keys(a.b).forEach(<span class="fstat-no" title="function not covered" >function(c){<span class="cstat-no" title="statement not covered" ></span>Object.keys(a.b[c]).forEach(<span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>b.push(a.b[c][d])}</span>)}</span>);<span class="cstat-no" title="statement not covered" >r</span>eturn A.all(b.map(<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return a.INTERNAL.delete()}</span>))}</span>).then(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>a.H=!0;<span class="cstat-no" title="statement not covered" >a</span>.b={}}</span>)}</span>;
+K.prototype.U=<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>L(this);<span class="cstat-no" title="statement not covered" >"</span>undefined"===typeof this.b[a]&amp;&amp;(this.b[a]={});<span class="cstat-no" title="statement not covered" >v</span>ar c=b||"[DEFAULT]";<span class="cstat-no" title="statement not covered" >r</span>eturn"undefined"===typeof this.b[a][c]?(b=this.F.INTERNAL.factories[a](this,this.T.bind(this),b),this.b[a][c]=b):this.b[a][c]}</span>;K.prototype.T=<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>z(this,a)}</span>;var L=function(a){a.H&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >M("app-deleted",{name:a.l})}</span>;m.Object.defineProperties(K.prototype,{name:{configurable:!0,enumerable:!0,get:function(){L(this);return this.l}},options:{configurable:!0,enumerable:!0,get:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>L(this);<span class="cstat-no" title="statement not covered" >r</span>eturn this.s}</span>}});
+K.prototype.name&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >K.prototype.options|</span>|K.prototype.delete||<span class="branch-3 cbranch-no" title="branch not covered" >console.log("dc");</span>
+function N(){<span class="fstat-no" title="function not covered" >function a(a){<span class="cstat-no" title="statement not covered" ></span>a=a||"[DEFAULT]";<span class="cstat-no" title="statement not covered" >v</span>ar b=d[a];<span class="cstat-no" title="statement not covered" >v</span>oid 0===b&amp;&amp;M("no-app",{name:a});<span class="cstat-no" title="statement not covered" >r</span>eturn b}<span class="fstat-no" title="function not covered" ></span>function b(a,b){<span class="cstat-no" title="statement not covered" ></span>Object.keys(e).forEach(<span class="fstat-no" title="function not covered" >function(d){<span class="cstat-no" title="statement not covered" ></span>d=c(a,d);<span class="cstat-no" title="statement not covered" >i</span>f(null!==d&amp;&amp;g[d])<span class="cstat-no" title="statement not covered" >g[d](b,a)}</span></span>)}<span class="fstat-no" title="function not covered" ></span>function c(a,b){<span class="cstat-no" title="statement not covered" ></span>if("serverAuth"===b)<span class="cstat-no" title="statement not covered" >return null;<span class="cstat-no" title="statement not covered" >v</span></span>ar c=b;<span class="cstat-no" title="statement not covered" >a</span>=a.options;<span class="cstat-no" title="statement not covered" >"</span>auth"===b&amp;&amp;(a.serviceAccount||a.credential)&amp;&amp;(c="serverAuth","serverAuth"in e||M("sa-not-supported"));<span class="cstat-no" title="statement not covered" >r</span>eturn c}</span>var d={},e={},g={},h={__esModule:!0,initializeApp:<span class="fstat-no" title="function not covered" >function(a,c){<span class="cstat-no" title="statement not covered" ></span>void 0===c?c="[DEFAULT]":"string"===typeof c&amp;&amp;""!==c||M("bad-app-name",</span>
+{name:c+""});<span class="cstat-no" title="statement not covered" >void 0!==d[c]&amp;&amp;M("duplicate-app",{name:c});<span class="cstat-no" title="statement not covered" >a</span>=new K(a,c,h);<span class="cstat-no" title="statement not covered" >d</span>[c]=a;<span class="cstat-no" title="statement not covered" >b</span>(a,"create");<span class="cstat-no" title="statement not covered" >v</span>oid 0!=a.INTERNAL&amp;&amp;void 0!=a.INTERNAL.getToken||z(a,{INTERNAL:{getUid:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return null}</span>,getToken:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return A.resolve(null)}</span>,addAuthTokenListener:<span class="fstat-no" title="function not covered" >function(){</span>},removeAuthTokenListener:<span class="fstat-no" title="function not covered" >function(){</span>}}});<span class="cstat-no" title="statement not covered" >r</span>eturn a}</span>,app:a,apps:null,Promise:A,SDK_VERSION:"0.0.0",INTERNAL:{registerService:function(b,c,d,n,Q){e[b]&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >M("duplicate-service",{name:b});</span>e[b]=Q?<span class="branch-0 cbranch-no" title="branch not covered" >c:<span class="fstat-no" title="function not covered" ></span>function(a,b){<span class="cstat-no" title="statement not covered" ></span>return c(a,b,"[DEFAULT]")}</span>;n&amp;&amp;(g[b]=
+n);n=<span class="fstat-no" title="function not covered" >function(c){<span class="cstat-no" title="statement not covered" ></span>void 0===c&amp;&amp;(c=a());<span class="cstat-no" title="statement not covered" >"</span>function"!==typeof c[b]&amp;&amp;M("invalid-app-argument",{name:b});<span class="cstat-no" title="statement not covered" >r</span>eturn c[b]()}</span>;void 0!==d&amp;&amp;z(n,d);return h[b]=n},createFirebaseNamespace:N,extendNamespace:function(a){z(h,a)},createSubscribe:B,ErrorFactory:I,removeApp:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>b(d[a],"delete");<span class="cstat-no" title="statement not covered" >d</span>elete d[a]}</span>,factories:e,useAsService:c,Promise:void 0,deepExtend:z}};h["default"]=h;Object.defineProperty(h,"apps",{get:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return Object.keys(d).map(<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return d[a]}</span>)}</span>});a.App=K;return h}
+<span class="fstat-no" title="function not covered" >function M(a,b){<span class="cstat-no" title="statement not covered" ></span>throw O.create(a,b);}</span>
+var O=new I("app","Firebase",{"no-app":"No Firebase App '{$name}' has been created - call Firebase App.initializeApp()","bad-app-name":"Illegal App name: '{$name}","duplicate-app":"Firebase App named '{$name}' already exists","app-deleted":"Firebase App named '{$name}' already deleted","duplicate-service":"Firebase service named '{$name}' already registered","sa-not-supported":"Initializing the Firebase SDK with a service account is only allowed in a Node.js environment. On client devices, you should instead initialize the SDK with an api key and auth domain","invalid-app-argument":"firebase.{$name}() takes either no argument or a Firebase App instance."});var S=N(),T=["$__firebase"],U=this;T[0]in U||!U.execScript||<span class="branch-2 cbranch-no" title="branch not covered" >U.execScript("var "+T[0]);</span>for(var V;T.length&amp;&amp;(V=T.shift());)T.length||void 0===S?<span class="branch-0 cbranch-no" title="branch not covered" >U=U[V]&amp;&amp;U[V]!==Object.prototype[V]?U[V]:U[V]={}:</span>U[V]=S; return $__firebase; })(); module.exports = firebase;
+firebase.SDK_VERSION = "3.7.5";
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 08:16:17 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
