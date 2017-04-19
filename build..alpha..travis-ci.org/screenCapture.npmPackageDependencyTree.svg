@@ -4,7 +4,7 @@
 <tspan x="10" y="26">8 megabytes installed</tspan>
 <tspan x="10" y="42"></tspan>
 <tspan x="10" y="58">node_modules</tspan>
-<tspan x="10" y="74">└─┬ firebase@3.7.8 </tspan>
+<tspan x="10" y="74">└─┬ firebase@3.8.0 </tspan>
 <tspan x="10" y="90">  ├── base64url@2.0.0 </tspan>
 <tspan x="10" y="106">  ├── buffer-equal-constant-time@1.0.1 </tspan>
 <tspan x="10" y="122">  ├── dom-storage@2.0.2 </tspan>
